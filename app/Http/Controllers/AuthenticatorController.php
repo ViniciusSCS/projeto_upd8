@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Geral;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,9 @@ class AuthenticatorController extends Controller
             $user = User::find($user->id);
             $token = $user->createToken('JWT')->plainTextToken;
 
-            return ['status' => true, 'message' => 'Usuário logado com sucesso!', "usuario" => $user, "token" => $token];
+            return ['status' => true, 'message' => Geral::USUARIO_LOGADO, "usuario" => $user, "token" => $token];
         } else {
-            return ['status' => false, 'message' => 'Usuário ou senha estão incorretos'];
+            return ['status' => false, 'message' => Geral::USUARIO_INCORRETO];
         }
     }
 
@@ -30,6 +31,6 @@ class AuthenticatorController extends Controller
 
         $user->tokens()->delete();
 
-        return ['status' => true, 'message' => 'Usuário deslogado com sucesso!'];
+        return ['status' => true, 'message' => Geral::USUARIO_DESLOGADO];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Geral;
 use App\Http\Requests\UsuarioRequest;
 use App\Services\UsuarioService;
 use Illuminate\Http\Request;
@@ -28,6 +29,6 @@ class UsuarioController extends Controller
 
         $user = $this->service->create($data);
 
-        return ['status' => true, "messages" => 'Usuário cadastrado com sucesso', "usuario" => $user];
+        return ['status' => true, "messages" => Geral::USUARIO_CADASTRADO, "usuario" => $user];
     }
 }
