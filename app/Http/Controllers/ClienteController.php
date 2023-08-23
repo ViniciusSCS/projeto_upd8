@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Constants\Geral;
 use App\Http\Requests\ClienteRequest;
+use App\Models\Cliente;
+use App\Models\Endereco;
 use App\Services\{
     ClienteService,
     EnderecoService
@@ -24,30 +26,26 @@ class ClienteController extends Controller
      * @OA\Post(
      *     tags={"Cliente"},
      *     path="/cliente/cadastro",
-     *     @OA\Parameter(
-     *         name="nome",
-     *         required=true,
-     *     ),
-     *     @OA\Parameter(
-     *         name="cpf",
-     *         required=true,
-     *     ),
-     *     @OA\Parameter(
-     *         name="sexo",
-     *         required=true,
-     *     ),
-     *     @OA\Parameter(
-     *         name="data_nascimento",
-     *         required=true,
-     *     ),
-     *     @OA\Parameter(
-     *         name="edereco",
-     *         required=false,
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="nome", type="strig"),
+     *              @OA\Property(property="cpf", type="strig"),
+     *              @OA\Property(property="sexo", type="strig"),
+     *              @OA\Property(property="data_nascimento", type="strig"),
+     *              @OA\Property(property="endereco", type="strig"),
+     *          )
      *     ),
      *     @OA\Response(response="200", description="Cadastra as informações do Cliente"),
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      *     @OA\Response(response="422", description="Erro em algum campo obrigatório"),
      * )
+     *
+     *
+     * @param ClienteRequest $request
+     * @return Endereco
+     * @return Cliente
      */
     public function create(ClienteRequest $request)
     {
@@ -64,6 +62,8 @@ class ClienteController extends Controller
      *     @OA\Response(response="200", description="Lista os Clientes cadastrados"),
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     * @return Cliente
      */
     public function list()
     {
@@ -79,7 +79,7 @@ class ClienteController extends Controller
      *     @OA\Parameter(
      *         name="id",
      *         description="Cliete id",
-     *         in="/editar/{id}",
+     *         in="path",
      *         required=true,
      *         @OA\Schema(
      *              type="integer",
@@ -90,6 +90,9 @@ class ClienteController extends Controller
      *     @OA\Response(response="204", description="Cliente não encotrado"),
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     * @param $id
+     * @return Cliente
      */
     public function edit($id)
     {
@@ -110,7 +113,7 @@ class ClienteController extends Controller
      *     @OA\Parameter(
      *         name="id",
      *         description="Cliete id",
-     *         in="/visualizar/{id}",
+     *         in="path",
      *         required=true,
      *         @OA\Schema(
      *              type="integer",
@@ -121,6 +124,9 @@ class ClienteController extends Controller
      *     @OA\Response(response="204", description="Cliente não encotrado"),
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     * @param $id
+     * @return Cliente
      */
     public function show($id)
     {
@@ -130,10 +136,14 @@ class ClienteController extends Controller
     /**
      * @OA\Get(
      *     tags={"Cliente"},
-     *     path="/cliente/buscar?",
+     *     path="/cliente/buscar",
      *     @OA\Parameter(
      *         name="nome",
      *         required=false,
+     *         in="path",
+     *         @OA\Schema(
+     *              type="string",
+     *         )
      *     ),
      *     @OA\Parameter(
      *         name="cpf",
@@ -158,6 +168,10 @@ class ClienteController extends Controller
      *     @OA\Response(response="200", description="Busca os Clietes conforme o que for preenchido"),
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     *
+     * @param Request $request
+     * @return Cliente
      */
     public function search(Request $request)
     {
@@ -182,19 +196,19 @@ class ClienteController extends Controller
      *     ),
      *     @OA\Parameter(
      *         name="nome",
-     *         required=true,
+     *         required=false,
      *     ),
      *     @OA\Parameter(
      *         name="cpf",
-     *         required=true,
+     *         required=false,
      *     ),
      *     @OA\Parameter(
      *         name="sexo",
-     *         required=true,
+     *         required=false,
      *     ),
      *     @OA\Parameter(
      *         name="data_nascimento",
-     *         required=true,
+     *         required=false,
      *     ),
      *     @OA\Parameter(
      *         name="edereco",
@@ -204,6 +218,11 @@ class ClienteController extends Controller
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      *     @OA\Response(response="422", description="Erro em algum campo obrigatório"),
      * )
+     *
+     *
+     * @param ClienteRequest $request
+     * @return Endereco
+     * @return Cliente
      */
     public function update(ClienteRequest $request, $id)
     {
@@ -217,20 +236,22 @@ class ClienteController extends Controller
      * @OA\Delete(
      *     tags={"Cliente"},
      *     path="/cliete/deletar/{id}",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Cliete id",
-     *          in="/deletar/{id}",
-     *          required=true,
-     *          @OA\Schema(
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="Cliete id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
      *              type="integer",
      *              format="int64"
-     *          )
-     *      ),
-     *     security={{"bearerAuth": {}}},
+     *         )
+     *     ),
      *     @OA\Response(response="200", description="Deleta o cliete ou Retorna que o mesmo não foi encontrado"),
      *     @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     * @param $id
+     * @return Cliente
      */
     public function destroy($id)
     {

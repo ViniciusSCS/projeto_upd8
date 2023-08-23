@@ -10,16 +10,16 @@
         }
     ],
     "paths": {
-        "/select/{codigo_uf}": {
+        "/cidade/select/{codigo_uf}": {
             "get": {
                 "tags": [
                     "Cidade"
                 ],
-                "operationId": "df5961975536cde0f0e8f75598757f8c",
+                "operationId": "96e3047c9759ee6a9709bd9f5b905a29",
                 "parameters": [
                     {
                         "name": "codigo_uf",
-                        "in": "/select/{codigo_uf}",
+                        "in": "path",
                         "description": "Código UF do Estado",
                         "required": true
                     }
@@ -40,28 +40,33 @@
                     "Cliente"
                 ],
                 "operationId": "d20711ee4ae838fbbbd57eda40832811",
-                "parameters": [
-                    {
-                        "name": "nome",
-                        "required": true
-                    },
-                    {
-                        "name": "cpf",
-                        "required": true
-                    },
-                    {
-                        "name": "sexo",
-                        "required": true
-                    },
-                    {
-                        "name": "data_nascimento",
-                        "required": true
-                    },
-                    {
-                        "name": "edereco",
-                        "required": false
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "strig"
+                                    },
+                                    "cpf": {
+                                        "type": "strig"
+                                    },
+                                    "sexo": {
+                                        "type": "strig"
+                                    },
+                                    "data_nascimento": {
+                                        "type": "strig"
+                                    },
+                                    "endereco": {
+                                        "type": "strig"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Cadastra as informações do Cliente"
@@ -100,7 +105,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "/editar/{id}",
+                        "in": "path",
                         "description": "Cliete id",
                         "required": true,
                         "schema": {
@@ -131,7 +136,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "/visualizar/{id}",
+                        "in": "path",
                         "description": "Cliete id",
                         "required": true,
                         "schema": {
@@ -153,16 +158,20 @@
                 }
             }
         },
-        "/cliente/buscar?": {
+        "/cliente/buscar": {
             "get": {
                 "tags": [
                     "Cliente"
                 ],
-                "operationId": "c788802972d8d38170c85ba8eda5c684",
+                "operationId": "2bc8770a30a201c88e76f2219f1c0af8",
                 "parameters": [
                     {
                         "name": "nome",
-                        "required": false
+                        "in": "path",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "cpf",
@@ -214,19 +223,19 @@
                     },
                     {
                         "name": "nome",
-                        "required": true
+                        "required": false
                     },
                     {
                         "name": "cpf",
-                        "required": true
+                        "required": false
                     },
                     {
                         "name": "sexo",
-                        "required": true
+                        "required": false
                     },
                     {
                         "name": "data_nascimento",
-                        "required": true
+                        "required": false
                     },
                     {
                         "name": "edereco",
@@ -255,7 +264,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "/deletar/{id}",
+                        "in": "path",
                         "description": "Cliete id",
                         "required": true,
                         "schema": {
@@ -271,12 +280,7 @@
                     "401": {
                         "description": "Usuário não Autenticado"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/estado/select": {

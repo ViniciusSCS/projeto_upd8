@@ -22,6 +22,8 @@ class EstadoController extends Controller
      *      @OA\Response(response="200", description="Apreseta todos os Estados"),
      *      @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     * @return Estado
      */
     public function select()
     {

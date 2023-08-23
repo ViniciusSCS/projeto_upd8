@@ -17,16 +17,19 @@ class CidadeController extends Controller
     /**
      * @OA\Get(
      *      tags={"Cidade"},
-     *      path="/select/{codigo_uf}",
+     *      path="/cidade/select/{codigo_uf}",
      *      @OA\Parameter(
      *          name="codigo_uf",
      *          description="Código UF do Estado",
-     *          in="/select/{codigo_uf}",
+     *          in="path",
      *          required=true,
      *      ),
      *      @OA\Response(response="200", description="Apreseta todas as cidades relacionnadas ao Codigo UF do Estado "),
      *      @OA\Response(response="401", description="Usuário não Autenticado"),
      * )
+     *
+     * @param $codigo_uf
+     * @return Cidade
      */
     public function selectPorEstado($codigo_uf)
     {
