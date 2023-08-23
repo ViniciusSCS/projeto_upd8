@@ -1,0 +1,299 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Teste upd8",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api"
+        }
+    ],
+    "paths": {
+        "/select/{codigo_uf}": {
+            "get": {
+                "tags": [
+                    "Cidade"
+                ],
+                "operationId": "df5961975536cde0f0e8f75598757f8c",
+                "parameters": [
+                    {
+                        "name": "codigo_uf",
+                        "in": "/select/{codigo_uf}",
+                        "description": "Código UF do Estado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apreseta todas as cidades relacionnadas ao Codigo UF do Estado "
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                }
+            }
+        },
+        "/cliente/cadastro": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "d20711ee4ae838fbbbd57eda40832811",
+                "parameters": [
+                    {
+                        "name": "nome",
+                        "required": true
+                    },
+                    {
+                        "name": "cpf",
+                        "required": true
+                    },
+                    {
+                        "name": "sexo",
+                        "required": true
+                    },
+                    {
+                        "name": "data_nascimento",
+                        "required": true
+                    },
+                    {
+                        "name": "edereco",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cadastra as informações do Cliente"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    },
+                    "422": {
+                        "description": "Erro em algum campo obrigatório"
+                    }
+                }
+            }
+        },
+        "/cliente/listar": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "0b8f72f48f6fd784c3129c8e5d942113",
+                "responses": {
+                    "200": {
+                        "description": "Lista os Clientes cadastrados"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                }
+            }
+        },
+        "/cliente/editar/{id}": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "b87b68dcf4504f3fe7b991f9951472be",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "/editar/{id}",
+                        "description": "Cliete id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apresenta a informação do Cliente selecionado para edição"
+                    },
+                    "204": {
+                        "description": "Cliente não encotrado"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                }
+            }
+        },
+        "/cliente/visualizar/{id}": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "408e02631ca32a95c5ec2afff76657f3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "/visualizar/{id}",
+                        "description": "Cliete id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Apresenta a informação do Cliente selecionado para visualização"
+                    },
+                    "204": {
+                        "description": "Cliente não encotrado"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                }
+            }
+        },
+        "/cliente/buscar?": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "c788802972d8d38170c85ba8eda5c684",
+                "parameters": [
+                    {
+                        "name": "nome",
+                        "required": false
+                    },
+                    {
+                        "name": "cpf",
+                        "required": false
+                    },
+                    {
+                        "name": "sexo",
+                        "required": false
+                    },
+                    {
+                        "name": "data_nascimento",
+                        "required": false
+                    },
+                    {
+                        "name": "estado",
+                        "required": false
+                    },
+                    {
+                        "name": "cidade",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Busca os Clietes conforme o que for preenchido"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                }
+            }
+        },
+        "/cliente/atualizar/{id}": {
+            "put": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "afcfac143771154acf7ca5f25949e4e4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "/atualizar/{id}",
+                        "description": "Cliete id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "nome",
+                        "required": true
+                    },
+                    {
+                        "name": "cpf",
+                        "required": true
+                    },
+                    {
+                        "name": "sexo",
+                        "required": true
+                    },
+                    {
+                        "name": "data_nascimento",
+                        "required": true
+                    },
+                    {
+                        "name": "edereco",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Atualiza as informações do Cliente"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    },
+                    "422": {
+                        "description": "Erro em algum campo obrigatório"
+                    }
+                }
+            }
+        },
+        "/cliete/deletar/{id}": {
+            "delete": {
+                "tags": [
+                    "Cliente"
+                ],
+                "operationId": "2445b12fe2136f4c9ded20a972b2499e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "/deletar/{id}",
+                        "description": "Cliete id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleta o cliete ou Retorna que o mesmo não foi encontrado"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/estado/select": {
+            "get": {
+                "tags": [
+                    "Estado"
+                ],
+                "operationId": "60b15b209c28384d0f8b9e8200b628f6",
+                "responses": {
+                    "200": {
+                        "description": "Apreseta todos os Estados"
+                    },
+                    "401": {
+                        "description": "Usuário não Autenticado"
+                    }
+                }
+            }
+        }
+    }
+}

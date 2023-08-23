@@ -15,6 +15,14 @@ class EstadoController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * @OA\Get(
+     *      tags={"Estado"},
+     *      path="/estado/select",
+     *      @OA\Response(response="200", description="Apreseta todos os Estados"),
+     *      @OA\Response(response="401", description="Usuário não Autenticado"),
+     * )
+     */
     public function select()
     {
         $query = Estado::all();

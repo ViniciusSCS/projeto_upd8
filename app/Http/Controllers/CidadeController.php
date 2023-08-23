@@ -14,6 +14,20 @@ class CidadeController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * @OA\Get(
+     *      tags={"Cidade"},
+     *      path="/select/{codigo_uf}",
+     *      @OA\Parameter(
+     *          name="codigo_uf",
+     *          description="Código UF do Estado",
+     *          in="/select/{codigo_uf}",
+     *          required=true,
+     *      ),
+     *      @OA\Response(response="200", description="Apreseta todas as cidades relacionnadas ao Codigo UF do Estado "),
+     *      @OA\Response(response="401", description="Usuário não Autenticado"),
+     * )
+     */
     public function selectPorEstado($codigo_uf)
     {
         $cidadePorEstado = $this->service->selectPorEstado($codigo_uf);
