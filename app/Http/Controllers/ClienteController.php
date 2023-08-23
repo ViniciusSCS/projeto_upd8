@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Constants\Geral;
 use App\Http\Requests\ClienteRequest;
-use App\Http\Requests\ClienteUpdateRequest;
-use App\Models\Cliente;
 use App\Services\{
     ClienteService,
     EnderecoService
